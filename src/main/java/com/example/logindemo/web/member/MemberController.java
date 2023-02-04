@@ -1,4 +1,4 @@
-package com.example.logindemo.web;
+package com.example.logindemo.web.member;
 
 import com.example.logindemo.domain.member.Member;
 import com.example.logindemo.domain.member.MemberRepository;
@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class MemberController {
     }
 
     @PostMapping("/add")
-    public String join(@ModelAttribute Member member, BindingResult bindingResult) {
+    public String join(@Valid @ModelAttribute Member member, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "member/addForm";
         }

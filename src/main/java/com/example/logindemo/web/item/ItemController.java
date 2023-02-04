@@ -1,4 +1,4 @@
-package com.example.logindemo.web;
+package com.example.logindemo.web.item;
 
 import com.example.logindemo.domain.item.DeliveryCode;
 import com.example.logindemo.domain.item.Item;
