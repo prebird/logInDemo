@@ -1,15 +1,14 @@
-package com.example.logindemo.repository;
+package com.example.logindemo.domain.member;
 
-import com.example.logindemo.domain.Member;
+import com.example.logindemo.domain.member.Member;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Repository
 public class MemberRepository {
-    private Map<String, Member> members = new HashMap<>();
+    private static Map<String, Member> members = new HashMap<>();
 
     public MemberRepository() {
         // 테스트용 초기값

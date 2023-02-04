@@ -1,4 +1,4 @@
-package com.example.logindemo.domain;
+package com.example.logindemo.domain.member;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.example.logindemo.service;
 
-import com.example.logindemo.repository.MemberRepository;
+import com.example.logindemo.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
