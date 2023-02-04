@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -35,8 +36,8 @@ public class MemberController {
 
     @GetMapping("/members")
     @ResponseBody
-    public Map<String, Member> members() {
-        Map<String, Member> all = memberRepository.getAll();
+    public List<Member> members() {
+        List<Member> all = memberRepository.getAll();
         log.info(all.toString());
         return all;
     }
