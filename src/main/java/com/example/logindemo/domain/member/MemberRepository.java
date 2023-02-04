@@ -4,6 +4,7 @@ import com.example.logindemo.domain.member.Member;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -12,7 +13,6 @@ public class MemberRepository {
 
     public MemberRepository() {
         // 테스트용 초기값
-        Map<String, Member> members = new HashMap<>();
         Member member = new Member("admin", "12", "정용규");
         members.put("admin", member);
     }
@@ -20,6 +20,8 @@ public class MemberRepository {
     public void addMember(Member member) {
         members.put(member.getId(), member);
     }
+
+    public Map<String, Member> getAll() {return members;}
 
     public Member getById(String id) {
         return members.get(id);
