@@ -6,9 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -25,7 +25,10 @@ public class MemberController {
     }
 
     @PostMapping("/add")
-    public String add(@ModelAttribute Member member) {
+    public String join(@ModelAttribute Member member, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "member/addForm";
+        }
         memberRepository.addMember(member);
         return "redirect:/";
     }

@@ -12,9 +12,7 @@ public class MemberRepository {
     private static Map<String, Member> members = new HashMap<>();
 
     public MemberRepository() {
-        // 테스트용 초기값
-        Member member = new Member("admin", "12", "정용규");
-        members.put("admin", member);
+
     }
 
     public void addMember(Member member) {
