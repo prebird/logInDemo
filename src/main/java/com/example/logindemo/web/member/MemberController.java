@@ -31,14 +31,14 @@ public class MemberController {
         if (bindingResult.hasErrors()) {
             return "member/addForm";
         }
-        memberRepository.addMember(member);
+        memberRepository.save(member);
         return "redirect:/";
     }
 
     @GetMapping("/members")
     @ResponseBody
     public List<Member> members() {
-        List<Member> all = memberRepository.getAll();
+        List<Member> all = memberRepository.findAll();
         log.info(all.toString());
         return all;
     }
