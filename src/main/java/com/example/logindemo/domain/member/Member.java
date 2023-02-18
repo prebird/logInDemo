@@ -7,17 +7,18 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotEmpty;
 
-@Getter
+@Getter @Setter
 @ToString
 public class Member {
-    @NotEmpty
     private Long id;
-
+    @NotEmpty
     private String loginId;
     @NotEmpty
     private String password;
     @NotEmpty
     private String name;
+
+    public Member() {}
 
     public Member(Long id, String loginId ,String password, String name) {
         this.id = id;
