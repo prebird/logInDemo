@@ -1,7 +1,7 @@
 package com.example.logindemo.web.login;
 
 import com.example.logindemo.domain.member.Member;
-import com.example.logindemo.service.LogInService;
+import com.example.logindemo.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -17,8 +17,8 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class LoginController {
 
-    /*
-    private final LogInService logInService;
+
+    private final LoginService logInService;
 
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("form") LoginForm form) {
@@ -43,6 +43,6 @@ public class LoginController {
 
         return "redirect:/";
     }
-     */
+
 
 }
