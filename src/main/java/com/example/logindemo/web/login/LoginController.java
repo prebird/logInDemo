@@ -21,13 +21,12 @@ public class LoginController {
     private final LoginService logInService;
 
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute("form") LoginForm form) {
-
+    public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
         return "login/loginForm";
     }
 
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute("form") LoginForm form, BindingResult bindingResult) {
+    public String login(@Valid @ModelAttribute("loginForm") LoginForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
         }
