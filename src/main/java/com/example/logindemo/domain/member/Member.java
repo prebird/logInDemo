@@ -11,19 +11,31 @@ import javax.validation.constraints.NotEmpty;
 @ToString
 public class Member {
     @NotEmpty
-    private String id;
+    private Long id;
+
+    private String loginId;
     @NotEmpty
     private String password;
     @NotEmpty
     private String name;
 
-    public Member(String id, String password, String name) {
+    public Member(Long id, String loginId ,String password, String name) {
         this.id = id;
+        this.loginId = loginId;
+        this.password = password;
+        this.name = name;
+    }
+    public Member(String loginId ,String password, String name) {
+        this.loginId = loginId;
         this.password = password;
         this.name = name;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public static Member empty() {
-        return new Member(null, null, null);
+        return new Member(null, null,null, null);
     }
 }

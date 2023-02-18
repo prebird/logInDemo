@@ -1,27 +1,40 @@
 package com.example.logindemo.domain.member;
 
 import com.example.logindemo.domain.member.Member;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
+@Slf4j
 public class MemberRepository {
-    private static List<Member> members = new ArrayList<>();
+    private static Map<Long, Member> store = new HashMap<>();
+    private static long sequence = 0L;
 
-    public MemberRepository() {
-
+    public Member save(Member member) {
+        member.setId(++sequence);
+        log.info("save: member= ", member);
+        store.put(member.getId(), member);
+        return member;
     }
 
-    public void addMember(Member member) {
-        members.add(member);
+    public Member findById(Long id) {
+        return store.get(id);
     }
 
-    public List<Member> getAll() {return members;}
-
-    public Optional<Member> getById(String id) {
-        return members.stream()
-                .filter(x -> x.getId().equals(id))
+    public Optional<Member> findByLoginId(String loginId) {
+        return store.values().stream()
+                .filter(m -> m.getLoginId().equals(loginId))
                 .findFirst();
+    }
+
+    public List<Member> findAll() {
+        return new ArrayList<>(store.values());
+    }
+
+    public void clearStore() {
+        store.clear();
     }
 }
