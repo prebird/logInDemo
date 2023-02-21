@@ -46,12 +46,12 @@ public class LoginController {
         }
 
         // 세션 관리자를 통해 회원데이터를 보관함
-        //sessionManager.createSession(loginMember, response);
+        sessionManager.createSession(loginMember, response);
 
         
         // 쿠키로만 로그인 처리
-        Cookie cookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
-        response.addCookie(cookie);
+//        Cookie cookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
+//        response.addCookie(cookie);
 
         return "redirect:/";
     }
