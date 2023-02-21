@@ -44,7 +44,6 @@ public class LoginController {
             return "login/loginForm";
         }
 
-        //TODO : 로그인 성공
         // 세션 관리자를 통해 회원데이터를 보관함
         sessionManager.createSession(loginMember, response);
 
