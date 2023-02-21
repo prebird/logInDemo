@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -45,8 +46,24 @@ public class LoginController {
         }
 
         // 세션 관리자를 통해 회원데이터를 보관함
-        sessionManager.createSession(loginMember, response);
+        //sessionManager.createSession(loginMember, response);
 
+        
+        // 쿠키로만 로그인 처리
+        Cookie cookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
+        response.addCookie(cookie);
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/logout")
+    public String logOut(HttpServletRequest request, HttpServletResponse response) {
+        sessionManager.expire(request);
+        // 쿠키 없애기
+        Cookie cookie = new Cookie("memberId", null);
+        cookie.setMaxAge(0);
+
+        response.addCookie(cookie);
         return "redirect:/";
     }
 
