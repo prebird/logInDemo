@@ -45,9 +45,8 @@ public class LoginController {
         }
 
         //TODO : 로그인 성공
-        // 쿠키에 로그인 성공한 유저 아이디 담기
-        Cookie cookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
-        response.addCookie(cookie);
+        // 세션 관리자를 통해 회원데이터를 보관함
+        sessionManager.createSession(loginMember, response);
 
         return "redirect:/";
     }
