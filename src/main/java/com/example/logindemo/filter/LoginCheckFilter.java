@@ -20,20 +20,20 @@ public class LoginCheckFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest httpRequest = (HttpServletRequest)request;
-        String requestURI = httpRequest.getRequestURI();
+        String requestURL = httpRequest.getRequestURI();
 
         HttpServletResponse HttpResponse = (HttpServletResponse)response;
 
         try {
-            log.info("인증 체크 필터 시작 {}", requestURI);
+            log.info("인증 체크 필터 시작 {}", requestURL);
 
-            if (isLoginCheckPath(requestURI)) {
+            if (isLoginCheckPath(requestURL)) {
                 log.info("인증 체크로직 실행");
                 HttpSession session = httpRequest.getSession();
                 if (session == null || session.getAttribute(SessionConst.LOGIN_MEMBER) == null) {
                     log.info("미인증 사용자 요청");
                     // 로그인으로 redirect
-                    HttpResponse.sendRedirect("/login?redirectURL=" + requestURI);
+                    HttpResponse.sendRedirect("/login?redirectURL=" + requestURL);
                     return;
                 }
             }
