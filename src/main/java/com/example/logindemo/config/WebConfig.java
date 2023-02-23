@@ -1,6 +1,7 @@
 package com.example.logindemo.config;
 
 import com.example.logindemo.filter.LogFilter;
+import com.example.logindemo.filter.LoginCheckFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,16 @@ public class WebConfig {
         filterFilterRegistrationBean.setFilter(new LogFilter());
         filterFilterRegistrationBean.setOrder(1);
         filterFilterRegistrationBean.addUrlPatterns("/*");
+
+        return filterFilterRegistrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean loginCheckFilter() {
+        FilterRegistrationBean<Filter> filterFilterRegistrationBean = new FilterRegistrationBean<>();
+        filterFilterRegistrationBean.setFilter(new LoginCheckFilter());
+        filterFilterRegistrationBean.setOrder(2);
+        filterFilterRegistrationBean.addUrlPatterns("/*");  // 화이트 리스트는 필터 내에 존재
 
         return filterFilterRegistrationBean;
     }

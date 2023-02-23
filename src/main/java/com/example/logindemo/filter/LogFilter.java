@@ -18,8 +18,7 @@ public class LogFilter implements Filter {
 
         // 다운캐스팅
         HttpServletRequest httpRequest = (HttpServletRequest)request;
-        // response 다운캐스팅 시 에러남..
-        //HttpServletResponse HttpResponse = (HttpServletResponse)request;
+        //HttpServletResponse HttpResponse = (HttpServletResponse)response;
 
         // 다음 필터 or 타겟 호출
         chain.doFilter(request, response);
