@@ -1,4 +1,4 @@
-package com.example.logindemo.filter;
+package com.example.logindemo.web.filter;
 
 import lombok.extern.slf4j.Slf4j;
 

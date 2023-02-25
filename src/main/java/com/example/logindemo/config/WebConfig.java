@@ -1,7 +1,7 @@
 package com.example.logindemo.config;
 
-import com.example.logindemo.filter.LogFilter;
-import com.example.logindemo.filter.LoginCheckFilter;
+import com.example.logindemo.web.filter.LogFilter;
+import com.example.logindemo.web.filter.LoginCheckFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
