@@ -20,7 +20,7 @@ public class LogInterceptor implements HandlerInterceptor {
         String requestURI = request.getRequestURI();
         String uuid = UUID.randomUUID().toString();
 
-        request.setAttribute(LOG_ID, uuid);
+        request.setAttribute(LOG_ID, uuid); // 이후에 같은 로그 ID 찍기 위해 (싱글톤이라 멤버변수 X)
 
         // @RequestMapping : HandlerMethod
         // 정적 리소스 : ResourceHttpRequestHandler
