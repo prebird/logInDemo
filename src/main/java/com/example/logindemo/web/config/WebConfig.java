@@ -1,10 +1,13 @@
 package com.example.logindemo.web.config;
 
+import com.example.logindemo.service.MemberService;
 import com.example.logindemo.web.argumentResolver.LoginMemberArgumentResolver;
 import com.example.logindemo.web.filter.LogFilter;
 import com.example.logindemo.web.filter.LoginCheckFilter;
 import com.example.logindemo.web.intercepter.LogInterceptor;
 import com.example.logindemo.web.intercepter.LoginCheckInterceptor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +18,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.servlet.Filter;
 import java.util.List;
 
+@Slf4j
 @Configuration
+@RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
+
+    private final MemberService memberService;
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
@@ -31,7 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")                                 // 모든 요청
                 .excludePathPatterns("/css/**", "/*.ico", "/error");    // 제외
 
-        registry.addInterceptor(new LoginCheckInterceptor())
+        registry.addInterceptor(new LoginCheckInterceptor(memberService))
                 .order(2)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/", "/login", "/logout", "/css/**", "/*.ico", "/error");
