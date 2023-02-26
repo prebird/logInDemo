@@ -16,4 +16,8 @@ public class LoginService {
                   .filter(m -> m.getPassword().equals(password))
                   .orElse(null);
     }
+
+    public void updateAutoLoginUUID(Long id, String uuid) {
+        memberRepository.setAutoLoginId(id, uuid);
+    }
 }
