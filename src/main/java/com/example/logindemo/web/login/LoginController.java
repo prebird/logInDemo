@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.UUID;
 
 @Slf4j
 @Controller
@@ -36,7 +37,7 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute("loginForm") LoginForm form,
                         BindingResult bindingResult,
-                        HttpServletRequest request,
+                        HttpServletRequest request, HttpServletResponse response,
                         @RequestParam(defaultValue = "/") String redirectURL) { // 없으면 /,  파라메터 명과 동일해야함
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
@@ -61,6 +62,20 @@ public class LoginController {
         // 세션이 있으면 재사용, 없으면 생성
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+
+        // 자동 로그인 처리
+        boolean isAutoLogin = form.getAutoLogin();
+
+        if (isAutoLogin) {
+            String uuid = UUID.randomUUID().toString();
+            logInService.updateAutoLoginUUID(loginMember.getId(), uuid); // DB저장
+
+            // 쿠키 저장
+            Cookie autoLoginCookie = new Cookie(SessionConst.AUTO_LOGIN, uuid);
+            autoLoginCookie.setMaxAge(60*60*24*7); // 일주일
+            autoLoginCookie.setPath("/");
+            response.addCookie(autoLoginCookie);
+        }
 
         return "redirect:" + redirectURL;
     }
