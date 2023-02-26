@@ -5,6 +5,7 @@ import com.example.logindemo.domain.item.DeliveryCode;
 import com.example.logindemo.domain.item.Item;
 import com.example.logindemo.domain.item.ItemRepository;
 import com.example.logindemo.domain.item.ItemType;
+import com.example.logindemo.web.commonUtil.CookieUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,7 +60,7 @@ public class ItemController {
         Item item = itemRepository.findById(itemId);
 
         // 최근 조회한 상품 기능
-        Cookie viewItmesCookie = findCookie(request, CookieConst.VIEW_ITEMS); // 1-2-
+        Cookie viewItmesCookie = CookieUtils.findCookieOrCreateNew(request, CookieConst.VIEW_ITEMS); // 1-2-
         String viewItemsStr = viewItmesCookie.getValue();
         boolean exists = false;
 
@@ -79,25 +80,7 @@ public class ItemController {
         return "item/item";
     }
 
-    private Cookie findCookie(HttpServletRequest request, String cookieName) {
-        Cookie[] cookies = request.getCookies();
-        Cookie targetCookie = null;
 
-        if (cookies != null && cookies.length > 0) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(cookieName)) {
-                    targetCookie = cookie;
-                }
-            }
-        }
-
-        if (targetCookie == null) {
-            targetCookie = new Cookie(cookieName, "");
-            targetCookie.setPath("/");
-            targetCookie.setMaxAge(60*60*24);
-        }
-        return targetCookie;
-    }
 
     @GetMapping("/add")
     public String addForm(Model model) {
