@@ -35,6 +35,12 @@ public class MemberRepository {
         member.setAutoLoginID(autoLoginId);
     }
 
+    public Optional<Member> findByAutoLoginID(String uuid) {
+        return store.values().stream()
+                .filter(m -> m.getAutoLoginID().equals(uuid))
+                .findAny();
+    }
+
     public List<Member> findAll() {
         return new ArrayList<>(store.values());
     }
