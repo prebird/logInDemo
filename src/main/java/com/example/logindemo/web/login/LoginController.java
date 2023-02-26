@@ -1,5 +1,6 @@
 package com.example.logindemo.web.login;
 
+import com.example.logindemo.constant.CookieConst;
 import com.example.logindemo.constant.SessionConst;
 import com.example.logindemo.domain.member.Member;
 import com.example.logindemo.service.LoginService;
@@ -71,7 +72,7 @@ public class LoginController {
             logInService.updateAutoLoginUUID(loginMember.getId(), uuid); // DB저장
 
             // 쿠키 저장
-            Cookie autoLoginCookie = new Cookie(SessionConst.AUTO_LOGIN, uuid);
+            Cookie autoLoginCookie = new Cookie(CookieConst.AUTO_LOGIN, uuid);
             autoLoginCookie.setMaxAge(60*60*24*7); // 일주일
             autoLoginCookie.setPath("/");
             response.addCookie(autoLoginCookie);
