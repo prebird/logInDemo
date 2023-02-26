@@ -25,6 +25,8 @@ public class TestDataInit {
 
         itemRepository.save(new Item("새우깡", 1000, 20));
         itemRepository.save(new Item("썬칩", 2000, 30));
+        itemRepository.save(new Item("감자칩", 1000, 20));
+        itemRepository.save(new Item("빼빼로", 2000, 30));
 
         memberRepository.save(new Member("admin", "12", "정용규"));
         memberRepository.save(new Member("admin2", "12", "구영진"));

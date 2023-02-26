@@ -1,5 +1,6 @@
 package com.example.logindemo.web.item;
 
+import com.example.logindemo.constant.CookieConst;
 import com.example.logindemo.domain.item.DeliveryCode;
 import com.example.logindemo.domain.item.Item;
 import com.example.logindemo.domain.item.ItemRepository;
@@ -10,13 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 @Controller
-@RequestMapping("/item")
+@RequestMapping("/items")
 @RequiredArgsConstructor
 public class ItemController {
 
@@ -53,10 +54,49 @@ public class ItemController {
     }
 
     @GetMapping("/{itemId}")
-    public String item(@PathVariable long itemId, Model model) {
+    public String item(@PathVariable long itemId, Model model,
+                       HttpServletRequest request, HttpServletResponse response) {
         Item item = itemRepository.findById(itemId);
+
+        // 최근 조회한 상품 기능
+        Cookie viewItmesCookie = findCookie(request, CookieConst.VIEW_ITEMS); // 1-2-
+        String viewItemsStr = viewItmesCookie.getValue();
+        boolean exists = false;
+
+        if (viewItemsStr != null && viewItemsStr.indexOf(itemId + "-") > 0) {
+            exists = true;
+        }
+
+        if (exists == false) {
+            viewItemsStr += (itemId + "-");
+            viewItmesCookie.setValue(viewItemsStr);
+            viewItmesCookie.setMaxAge(60*60*24);
+            viewItmesCookie.setPath("/");
+            response.addCookie(viewItmesCookie);
+        }
+
         model.addAttribute("item", item);
         return "item/item";
+    }
+
+    private Cookie findCookie(HttpServletRequest request, String cookieName) {
+        Cookie[] cookies = request.getCookies();
+        Cookie targetCookie = null;
+
+        if (cookies != null && cookies.length > 0) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(cookieName)) {
+                    targetCookie = cookie;
+                }
+            }
+        }
+
+        if (targetCookie == null) {
+            targetCookie = new Cookie(cookieName, "");
+            targetCookie.setPath("/");
+            targetCookie.setMaxAge(60*60*24);
+        }
+        return targetCookie;
     }
 
     @GetMapping("/add")
