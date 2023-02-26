@@ -18,6 +18,8 @@ public class Member {
     @NotEmpty
     private String name;
 
+    private String autoLoginID;
+
     public Member() {}
 
     public Member(Long id, String loginId ,String password, String name) {
