@@ -30,6 +30,11 @@ public class MemberRepository {
                 .findFirst();
     }
 
+    public void setAutoLoginId(Long id, String autoLoginId) {
+        Member member = store.get(id);
+        member.setAutoLoginID(autoLoginId);
+    }
+
     public List<Member> findAll() {
         return new ArrayList<>(store.values());
     }
