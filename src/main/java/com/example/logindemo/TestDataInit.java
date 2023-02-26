@@ -28,8 +28,10 @@ public class TestDataInit {
         itemRepository.save(new Item("감자칩", 1000, 20));
         itemRepository.save(new Item("빼빼로", 2000, 30));
 
-        memberRepository.save(new Member("admin", "12", "정용규"));
-        memberRepository.save(new Member("admin2", "12", "구영진"));
+        Member member1 = memberRepository.save(new Member("admin", "12", "jeong"));
+        memberRepository.setAutoLoginId(member1.getId(), "84c247d3-ae86-4eee-95ab-bcce4567e598");
+
+        memberRepository.save(new Member("admin2", "12", "koo"));
         log.info("test data add");
     }
 }
