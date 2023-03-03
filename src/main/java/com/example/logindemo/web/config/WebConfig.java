@@ -19,7 +19,7 @@ import javax.servlet.Filter;
 import java.util.List;
 
 @Slf4j
-@Configuration
+//@Configuration // 인터셉터 빈 등록 해제
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
