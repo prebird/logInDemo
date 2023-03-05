@@ -28,6 +28,11 @@ public class CustomSecurityConfig {
         log.info("--------------- configure ---------------");
 
         http.formLogin().loginPage("/login");   // 커스텀 로그인 페이지
+        // 기존의 로그인 처리를 타지 않고, POST 로그인 역시 security 내부에서 처리하게 된다.
+        // 로그아웃도 시큐리티에서 처리해준다.
+        // we don't need to make POST-login, POST-logout
+        
+        http.csrf().disable(); // csrf 토근 확인 비활성화
 
         return http.build();
     }
