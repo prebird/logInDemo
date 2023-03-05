@@ -7,6 +7,7 @@ import com.example.logindemo.domain.item.ItemRepository;
 import com.example.logindemo.domain.item.ItemType;
 import com.example.logindemo.web.commonUtil.CookieUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +48,8 @@ public class ItemController {
         return deliveryCodes;
     }
 
-    @GetMapping
+    @PreAuthorize("hasRole('USER')")    // apply spring-security login filter
+    @GetMapping()
     public String items(Model model) {
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
