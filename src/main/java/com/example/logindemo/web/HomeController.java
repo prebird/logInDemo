@@ -6,6 +6,7 @@ import com.example.logindemo.domain.member.MemberRepository;
 import com.example.logindemo.web.argumentResolver.Login;
 import com.example.logindemo.web.session.SessionManager;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
@@ -23,11 +25,11 @@ public class HomeController {
 
     @GetMapping("/")
     public String homeLoginV3ArgumetResolver(@Login Member member, Model model) {
-
-        if (member == null) {
+        log.info(member.toString());
+        if (member.getId() == null) {
             return "home";
         }
-
+        log.info("loginHome");
         model.addAttribute("member", member);
         return "loginHome";
     }

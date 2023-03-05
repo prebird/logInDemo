@@ -41,4 +41,15 @@ public class Member {
     public static Member empty() {
         return new Member(null, null,null, null);
     }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", loginId='" + loginId + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", autoLoginID='" + autoLoginID + '\'' +
+                '}';
+    }
 }
