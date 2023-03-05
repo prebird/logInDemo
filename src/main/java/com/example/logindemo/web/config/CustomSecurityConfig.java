@@ -27,7 +27,7 @@ public class CustomSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         log.info("--------------- configure ---------------");
 
-        http.formLogin();
+        http.formLogin().loginPage("/login");   // 커스텀 로그인 페이지
 
         return http.build();
     }
