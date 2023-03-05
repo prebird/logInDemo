@@ -18,6 +18,8 @@ public class CustomSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         log.info("--------------- configure ---------------");
 
+        http.formLogin();
+
         return http.build();
     }
 
