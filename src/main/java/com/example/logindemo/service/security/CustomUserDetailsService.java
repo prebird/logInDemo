@@ -21,8 +21,8 @@ public class CustomUserDetailsService implements UserDetailsService {   // call 
         log.info("loadUserByUsername : " + username);
 
         // username, encoded password, authority
-        UserDetails userDetails = User.builder().username("user1")
-                .password(passwordEncoder.encode("111")) //TODO: Encode password
+        UserDetails userDetails = User.builder().username("admin")
+                .password(passwordEncoder.encode("12")) //TODO: Encode password
                 .authorities("ROLE_USER")
                 .build();
 
