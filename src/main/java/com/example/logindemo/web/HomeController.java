@@ -31,19 +31,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String homeLoginV3ArgumetResolver(Model model, HttpServletRequest request) {
-        log.info("spring-security는 로그인 쿠키 저장에 어떤 세션 ID를 쓸까");
-
-        HttpSession session = request.getSession();
-        Enumeration<String> attributeNames = session.getAttributeNames();
-        while (attributeNames.hasMoreElements()) {
-            String attr = attributeNames.nextElement();
-            log.info(attr);
-        }
-        Object sessionObject = session.getAttribute("SPRING_SECURITY_CONTEXT");
-        if (sessionObject == null) {
-            return "home";
-        }
-        log.info(sessionObject.toString());
 
         // 스프링 시큐리티 사용시 코드 -> 세션에서 get 해서 사용안함
         // 세션에서 get 한 Object 를 User or UserDetails로 cast할 수 없음 
