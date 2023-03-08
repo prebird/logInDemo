@@ -8,6 +8,11 @@ import com.example.logindemo.web.session.SessionManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -25,7 +30,7 @@ public class HomeController {
     private final SessionManager sessionManager;
 
     @GetMapping("/")
-    public String homeLoginV3ArgumetResolver(@Login Member member, Model model, HttpServletRequest request) {
+    public String homeLoginV3ArgumetResolver(Model model, HttpServletRequest request) {
         log.info("spring-security는 로그인 쿠키 저장에 어떤 세션 ID를 쓸까");
 
         HttpSession session = request.getSession();
@@ -35,15 +40,39 @@ public class HomeController {
             log.info(attr);
         }
         Object sessionObject = session.getAttribute("SPRING_SECURITY_CONTEXT");
-        log.info(sessionObject.toString());
-        
-        log.info(member.toString());
-        if (member.getId() == null) {
+        if (sessionObject == null) {
             return "home";
         }
-        log.info("loginHome");
-        model.addAttribute("member", member);
-        return "loginHome";
+        log.info(sessionObject.toString());
+
+        // 스프링 시큐리티 사용시 코드 -> 세션에서 get 해서 사용안함
+        // 세션에서 get 한 Object 를 User or UserDetails로 cast할 수 없음 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof User) {
+                User user = (User) principal;
+                model.addAttribute("user", user);
+                return "loginHome";
+            }
+        }
+        return "home";
+
+        // 시큐리티 사용 후 에러난 코드
+//        if (user.getUsername() == null) {
+//            return "home";
+//        }
+//        model.addAttribute("user", user);
+//        return "loginHome";
+
+
+        // security 사용 전
+//        log.info(member.toString());
+//        if (member.getId() == null) {
+//            return "home";
+//        }
+        //model.addAttribute("member", member);
+        //return "loginHome";
     }
 
 //    @GetMapping("/")
