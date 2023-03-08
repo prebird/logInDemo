@@ -35,7 +35,7 @@ public class LoginMemberArgumentResolver implements HandlerMethodArgumentResolve
             return null;
         }
 
-        Object member = session.getAttribute(SessionConst.LOGIN_MEMBER);    // spring security 에서는 어떤 세션 ID를 쓰는걸까
+        Object member = session.getAttribute(SessionConst.SPRING_SECURITY_LOGIN);    // spring security 에서는 어떤 세션 ID를 쓰는걸까
         return member;
     }
 }
