@@ -27,6 +27,7 @@ public class MemberRepository {
     public Optional<Member> findByLoginId(String loginId) {
         return store.values().stream()
                 .filter(m -> m.getLoginId().equals(loginId))
+                .filter(m -> m.getSocial().equals(false))   // 소셜 로그인 안된 인원만
                 .findFirst();
     }
 

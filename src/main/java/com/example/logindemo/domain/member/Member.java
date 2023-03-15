@@ -8,10 +8,10 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter @Setter
-@ToString
 public class Member {
     private Long id;
     @NotEmpty
@@ -23,9 +23,9 @@ public class Member {
 
     private String email;
 
-    private Set<MemberRole> roleSet;
+    private Set<MemberRole> roleSet = new HashSet<>();
 
-    private String social;
+    private Boolean social;
 
     private String autoLoginID;
 
@@ -38,7 +38,7 @@ public class Member {
         this.name = name;
     }
 
-    public Member(Long id, String loginId ,String password, String name, String email, String social) {
+    public Member(Long id, String loginId ,String password, String name, String email, Boolean social) {
         this.id = id;
         this.loginId = loginId;
         this.password = password;
@@ -57,7 +57,7 @@ public class Member {
         this.id = id;
     }
 
-    public void addRoleSet(MemberRole memberRole) {
+    public void addRole(MemberRole memberRole) {
         this.roleSet.add(memberRole);
     }
 
