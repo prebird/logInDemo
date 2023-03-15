@@ -44,7 +44,7 @@ public class HomeController {
             }
         }
         return "home";
-
+        // 주석
         // 시큐리티 사용 후 에러난 코드
 //        if (user.getUsername() == null) {
 //            return "home";
