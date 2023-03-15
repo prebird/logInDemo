@@ -35,8 +35,10 @@ public class TestDataInit {
         Member member1 = memberRepository.save(new Member("admin", passwordEncoder.encode("12"), "jeong"));
         //memberRepository.setAutoLoginId(member1.getId(), "84c247d3-ae86-4eee-95ab-bcce4567e598");
         member1.addRole(MemberRole.ADMIN);
+        member1.setSocial(false);
         Member member2 = new Member("user1", passwordEncoder.encode("123"), "koo");
         member2.addRole(MemberRole.USER);
+        member2.setSocial(false);
 
         memberRepository.save(member1);
         memberRepository.save(member2);

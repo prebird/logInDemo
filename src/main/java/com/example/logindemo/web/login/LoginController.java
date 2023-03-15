@@ -26,7 +26,12 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class LoginController {
 
+    @GetMapping("/login")
+    public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
+        return "login/loginForm";
+    }
 
+/*
     private final LoginService logInService;
     private final SessionManager sessionManager;
 
@@ -44,7 +49,7 @@ public class LoginController {
             return "login/loginForm";
         }
 
-        Member loginMember = logInService.login(form.getLoginId(), form.getPassword());
+        //Member loginMember = logInService.login(form.getLoginId(), form.getPassword());
 
         if (loginMember == null) {
             bindingResult.reject("loginFail", "ID 또는 비밀번호가 맞지 않습니다.");
@@ -91,4 +96,7 @@ public class LoginController {
         }
         return "redirect:/";
     }
+
+
+ */
 }

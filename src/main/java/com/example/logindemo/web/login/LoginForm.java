@@ -9,7 +9,8 @@ import javax.validation.constraints.NotEmpty;
 public class LoginForm {
 
     @NotEmpty
-    private String loginId;
+    //private String loginId;
+    private String username;
     @NotEmpty
     private String password;
     private Boolean autoLogin;

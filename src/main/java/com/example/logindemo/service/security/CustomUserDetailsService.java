@@ -32,6 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {   // call 
         Optional<Member> result = memberRepository.findByLoginId(username);// id로 조회
 
         if (result.isEmpty()) {
+            log.error("아이디가 없습니다");
             throw new UsernameNotFoundException("아이디(username)이 없습니다.");
         }
 
